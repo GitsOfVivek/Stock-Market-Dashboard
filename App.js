@@ -36,7 +36,7 @@ const getData = function (searchTerm, filter) {
 		})
 		.catch(() => showError(searchTerm));
 };
-function cbForSearchBtn() {
+function cbForSearchBtn(searchTerm, selectedFilter) {
 	modalHeaderLeft.innerHTML = '';
 	btnsWrapperModal.innerHTML = '';
 
@@ -272,6 +272,22 @@ function cbForSearchBtn() {
 			<div class="loading-2">We are fetching Data...⌛</div>
 		</div>
 	`;
+	// const searchTerm = inputText.value.toLowerCase().trim();
+	// if (searchTerm !== '') {
+	// 	let selectedFilter;
+	// 	for (const el of inputFilterAll) {
+	// 		if (el.classList.contains('filter--selected')) {
+	// 			selectedFilter = el.textContent.toUpperCase().trim();
+	// 		}
+	// 	}
+	// 	getData(searchTerm, selectedFilter);
+	// 	showModal();
+	// }
+	// inputText.value = '';
+	getData(searchTerm, selectedFilter);
+	showModal();
+}
+searchBtn.addEventListener('click', () => {
 	const searchTerm = inputText.value.toLowerCase().trim();
 	if (searchTerm !== '') {
 		let selectedFilter;
@@ -280,17 +296,23 @@ function cbForSearchBtn() {
 				selectedFilter = el.textContent.toUpperCase().trim();
 			}
 		}
-		getData(searchTerm, selectedFilter);
-		showModal();
+		cbForSearchBtn(searchTerm, selectedFilter);
 	}
 	inputText.value = '';
-}
-searchBtn.addEventListener('click', () => {
-	cbForSearchBtn();
 });
 window.addEventListener('keyup', e => {
 	if (inputText.value.trim().toLowerCase() !== '' && e.key === 'Enter') {
-		cbForSearchBtn();
+		const searchTerm = inputText.value.toLowerCase().trim();
+		if (searchTerm !== '') {
+			let selectedFilter;
+			for (const el of inputFilterAll) {
+				if (el.classList.contains('filter--selected')) {
+					selectedFilter = el.textContent.toUpperCase().trim();
+				}
+			}
+			cbForSearchBtn(searchTerm, selectedFilter);
+		}
+		inputText.value = '';
 	}
 });
 
@@ -678,7 +700,7 @@ function showData(stockData) {
 function showError(text) {
 	dataGraph.innerHTML = `
 	<div id="loading-section">
-		<div class="loading"><strong style="color: rgb(176, 0, 85)">Error...</strong></div>
+		<div class="loading"><strong style="color: rgb(176, 0, 85)">Error!!!</strong></div>
 		<div class="loading-2"><strong>${text.toUpperCase()}</strong> is not a valid symbol</div>
 	</div>
 	`;
@@ -696,13 +718,13 @@ function showWatchList(arr) {
 		const div = document.createElement('div');
 		div.classList.add('stock-item');
 		div.innerHTML = `
-		<div class="bg-white">
+		<div data-stock-info="${x.name}-${x.price}-${x.filter}" onclick="callCB(this)" class="bg-white">
 			<span>${x.name}</span>
 		</div>
-		<div class="${x.color}">
+		<div data-stock-info="${x.name}-${x.price}-${x.filter}" onclick="callCB(this)" class="${x.color}">
 			<span>${x.price}</span>
 		</div>
-		<div class="bg-white">
+		<div data-stock-info="${x.name}-${x.price}-${x.filter}" onclick="callCB(this)" class="bg-white">
 			<span>${x.filter}</span>
 		</div>
 		<div data-stock-info="${x.name}-${x.price}-${x.filter}" onclick="removeFromStorage(this)" class="bg-red">
@@ -760,4 +782,9 @@ function removeFromStorage(e) {
 		showWatchList(watchListData);
 	}
 	localStorage.setItem('watchlist', JSON.stringify(watchListData));
+}
+
+function callCB(e) {
+	const arr = e.dataset.stockInfo.split('-');
+	cbForSearchBtn(arr[0].toUpperCase(), arr[2].toUpperCase());
 }
