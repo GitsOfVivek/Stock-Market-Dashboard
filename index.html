@@ -95,50 +95,21 @@
 						<div></div>
 					</div>
 				</div>
-				<div class="stock-list">
+				<div id="stock-list" class="stock-list">
 					<!-- Stock List -->
-					<div class="stock-item">
-						<div class="stock-item--name bg-white">
+					<!-- <div class="stock-item">
+						<div class="bg-white">
 							<span>AMZN</span>
 						</div>
-						<div class="stock-item--price bg-green">
+						<div class="bg-green">
 							<span>123.45</span>
 						</div>
-						<div class="stock-item--filter bg-white">
+						<div class="bg-white">
 							<span>Intraday</span>
 						</div>
-						<div class="stock-item--delete bg-red">
+						<div class="bg-red">
 							<span>Delete</span>
-						</div>
-					</div>
-					<div class="stock-item">
-						<div class="stock-item--name bg-white">
-							<span>MSFT</span>
-						</div>
-						<div class="stock-item--price bg-white">
-							<span>67.89</span>
-						</div>
-						<div class="stock-item--filter bg-white">
-							<span>Daily</span>
-						</div>
-						<div class="stock-item--delete bg-red">
-							<span>Delete</span>
-						</div>
-					</div>
-
-					<div class="stock-item">
-						<div class="stock-item--name bg-white">
-							<span>IBM</span>
-						</div>
-						<div class="stock-item--price bg-red">
-							<span>56.34</span>
-						</div>
-						<div class="stock-item--filter bg-white">
-							<span>Monthly</span>
-						</div>
-						<div class="stock-item--delete bg-red">
-							<span>Delete</span>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>
@@ -536,11 +507,11 @@
 						<div class="loading-2">We are fetching Data...⌛</div>
 					</div>
 				</div>
-				<div class="modal__btns">
-					<!-- <div class="modal__btns-info">
-						<button>Add to Watchlist</button>
-						<button>Remove from Watchlist</button>
-					</div> -->
+				<div id="modal__btns" class="modal__btns">
+					<div class="modal__btns-info">
+						<button data-stock-info="symbol-filter" id="btn-add-watchlist">Add</button>
+						<button data-stock-info="symbol-filter" id="btn-remove-watchlist">Remove</button>
+					</div>
 				</div>
 			</div>
 		</div>

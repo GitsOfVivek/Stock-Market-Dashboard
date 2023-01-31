@@ -252,28 +252,16 @@ header {
 	align-items: center;
 	justify-content: center;
 	height: 5rem;
+	cursor: pointer;
 }
 .stock-item > div > span {
 	display: inline-block;
 	transform: skewX(10deg);
 	font-size: 3rem;
-}
-.stock-item--name {
 	text-transform: uppercase;
 	font-weight: 600;
 }
 
-.stock-item--price {
-	text-transform: uppercase;
-	font-weight: 500;
-}
-.stock-item--filter {
-	text-transform: uppercase;
-}
-.stock-item--delete {
-	text-transform: uppercase;
-	cursor: pointer;
-}
 .bg-green {
 	background: linear-gradient(
 		to bottom right,
