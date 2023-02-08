@@ -1,7 +1,7 @@
 // Alpha Vantage Stock API
-// API Key: VLP5C5GCWR65Y9XP
+// apiKey = VLP5C5GCWR65Y9XP
 
-let data;
+const apiKey = 'VLP5C5GCWR65Y9XP';
 
 const searchBtn = document.getElementById('btn--search');
 const inputText = document.getElementById('input-box');
@@ -23,18 +23,21 @@ inputFilterAll.forEach(btnFil => {
 	});
 });
 
-const getData = function (searchTerm, filter) {
-	const url =
-		filter !== 'INTRADAY'
-			? `https://www.alphavantage.co/query?function=TIME_SERIES_${filter}_ADJUSTED&symbol=${searchTerm}&apikey=VLP5C5GCWR65Y9XP`
-			: `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${searchTerm}&interval=15min&apikey=VLP5C5GCWR65Y9XP`;
-	fetch(url)
-		.then(res => res.json())
-		.then(resData => {
-			data = resData;
-			showData(data);
-		})
-		.catch(() => showError(searchTerm));
+const getData = async function (searchTerm, filter) {
+	searchTerm = searchTerm.toUpperCase();
+	filter = filter.toUpperCase();
+	try {
+		const url =
+			filter !== 'INTRADAY'
+				? `https://www.alphavantage.co/query?function=TIME_SERIES_${filter}_ADJUSTED&symbol=${searchTerm}&apikey=${apiKey}`
+				: `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${searchTerm}&interval=15min&apikey=${apiKey}`;
+		const res = await fetch(url);
+		const resData = await res.json();
+		showData(resData);
+	} catch (err) {
+		showError(searchTerm);
+		console.error(err);
+	}
 };
 function cbForSearchBtn(searchTerm, selectedFilter) {
 	modalHeaderLeft.innerHTML = '';
@@ -272,18 +275,6 @@ function cbForSearchBtn(searchTerm, selectedFilter) {
 			<div class="loading-2">We are fetching Data...⌛</div>
 		</div>
 	`;
-	// const searchTerm = inputText.value.toLowerCase().trim();
-	// if (searchTerm !== '') {
-	// 	let selectedFilter;
-	// 	for (const el of inputFilterAll) {
-	// 		if (el.classList.contains('filter--selected')) {
-	// 			selectedFilter = el.textContent.toUpperCase().trim();
-	// 		}
-	// 	}
-	// 	getData(searchTerm, selectedFilter);
-	// 	showModal();
-	// }
-	// inputText.value = '';
 	getData(searchTerm, selectedFilter);
 	showModal();
 }
@@ -735,7 +726,47 @@ function showWatchList(arr) {
 		watchList.append(div);
 	}
 }
-window.onload = showWatchList(watchListData);
+
+async function updateWatchList(arr) {
+	for (const stock of arr) {
+		const url =
+			stock.filter.toUpperCase() !== 'INTRADAY'
+				? `https://www.alphavantage.co/query?function=TIME_SERIES_${stock.filter}_ADJUSTED&symbol=${stock.name}&apikey=${apiKey}`
+				: `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stock.name}&interval=15min&apikey=${apiKey}`;
+		const res = await fetch(url);
+		const stockData = await res.json();
+
+		const dataArr = [];
+		for (const x in stockData) {
+			dataArr.push(x);
+		}
+
+		const sliced = Object.fromEntries(
+			Object.entries(stockData[dataArr[1]]).slice(0, 5)
+		);
+		const first = Object.fromEntries(Object.entries(sliced).slice(0, 5));
+
+		const timeArr = [];
+		for (const x in first) {
+			timeArr.push(x);
+		}
+		// price
+		if (
+			stock.price < Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+		) {
+			stock.color = 'bg-green';
+		} else if (
+			stock.price === Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+		) {
+			stock.color = 'bg-white';
+		} else {
+			stock.color = 'bg-red';
+		}
+		stock.price = Number(first[`${timeArr[0]}`]['1. open']).toFixed(2);
+	}
+	showWatchList(arr);
+}
+window.onload = updateWatchList(watchListData);
 
 function addToStorage(e) {
 	const addStockIndo = e.dataset.stockInfo.split('-');

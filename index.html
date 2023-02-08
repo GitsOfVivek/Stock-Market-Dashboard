@@ -95,21 +95,126 @@
 						<div></div>
 					</div>
 				</div>
+
+				<!-- Watchlist -->
+
 				<div id="stock-list" class="stock-list">
 					<!-- Stock List -->
-					<!-- <div class="stock-item">
-						<div class="bg-white">
-							<span>AMZN</span>
-						</div>
-						<div class="bg-green">
-							<span>123.45</span>
-						</div>
-						<div class="bg-white">
-							<span>Intraday</span>
-						</div>
-						<div class="bg-red">
-							<span>Delete</span>
-						</div> -->
+					<div class="loading-stock">
+						<?xml version="1.0" encoding="utf-8"?>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							xmlns:xlink="http://www.w3.org/1999/xlink"
+							style="
+								margin: auto;
+								background: transparent;
+								display: block;
+								shape-rendering: auto;
+							"
+							width="100px"
+							height="100px"
+							viewBox="0 0 100 100"
+							preserveAspectRatio="xMidYMid">
+							<circle cx="84" cy="50" r="10" fill="#ff7f00">
+								<animate
+									attributeName="r"
+									repeatCount="indefinite"
+									dur="0.5s"
+									calcMode="spline"
+									keyTimes="0;1"
+									values="10;0"
+									keySplines="0 0.5 0.5 1"
+									begin="0s"></animate>
+								<animate
+									attributeName="fill"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="discrete"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="#ff7f00;#b00055;#ffaf00;#ff0000;#ff7f00"
+									begin="0s"></animate>
+							</circle>
+							<circle cx="16" cy="50" r="10" fill="#ff7f00">
+								<animate
+									attributeName="r"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="0;0;10;10;10"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="0s"></animate>
+								<animate
+									attributeName="cx"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="16;16;16;50;84"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="0s"></animate>
+							</circle>
+							<circle cx="50" cy="50" r="10" fill="#ff0000">
+								<animate
+									attributeName="r"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="0;0;10;10;10"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-0.5s"></animate>
+								<animate
+									attributeName="cx"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="16;16;16;50;84"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-0.5s"></animate>
+							</circle>
+							<circle cx="84" cy="50" r="10" fill="#ffaf00">
+								<animate
+									attributeName="r"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="0;0;10;10;10"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-1s"></animate>
+								<animate
+									attributeName="cx"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="16;16;16;50;84"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-1s"></animate>
+							</circle>
+							<circle cx="16" cy="50" r="10" fill="#b00055">
+								<animate
+									attributeName="r"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="0;0;10;10;10"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-1.5s"></animate>
+								<animate
+									attributeName="cx"
+									repeatCount="indefinite"
+									dur="2s"
+									calcMode="spline"
+									keyTimes="0;0.25;0.5;0.75;1"
+									values="16;16;16;50;84"
+									keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1"
+									begin="-1.5s"></animate>
+							</circle>
+						</svg>
 					</div>
 				</div>
 			</div>
@@ -132,19 +237,9 @@
 		<div id="modal" class="modal hidden">
 			<div class="modal-wrapper">
 				<div class="modal__header">
-					<div id="modal__header-left" class="modal__header-left">
-						<!-- <div class="stock-info">
-							<div class="stock-name bg-white">
-								<span>AMZN</span>
-							</div>
-							<div class="stock-price bg-green">
-								<span>123.56</span>
-							</div>
-							<div class="stock-filter bg-white">
-								<span>Intraday</span>
-							</div>
-						</div> -->
-					</div>
+					<div
+						id="modal__header-left"
+						class="modal__header-left"></div>
 					<div class="close-btn">
 						<button id="btn-close-modal" class="btn-close-modal">
 							X
@@ -152,129 +247,6 @@
 					</div>
 				</div>
 				<div id="data-graph" class="data-graph">
-					<!-- <div class="data-graph-info">
-						<div class="graph-item">
-							<div class="graph-item--header">
-								<span>30-01-2023</span>
-							</div>
-							<div class="graph-item--header">
-								<span>Open</span>
-							</div>
-							<div class="graph-item--header">
-								<span>High</span>
-							</div>
-							<div class="graph-item--header">
-								<span>Low</span>
-							</div>
-							<div class="graph-item--header">
-								<span>Close</span>
-							</div>
-							<div class="graph-item--header">
-								<span>Volume</span>
-							</div>
-						</div>
-						<div class="graph-item">
-							<div class="graph-item--name bg-white">
-								<span>18:15:00</span>
-							</div>
-							<div class="graph-item--price bg-white">
-								<span>153.45</span>
-							</div>
-							<div class="graph-item--filter bg-white">
-								<span>169.98</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>103.87</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>130.45</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>157.34</span>
-							</div>
-						</div>
-						<div class="graph-item">
-							<div class="graph-item--name bg-white">
-								<span>18:15:00</span>
-							</div>
-							<div class="graph-item--price bg-white">
-								<span>153.45</span>
-							</div>
-							<div class="graph-item--filter bg-white">
-								<span>169.98</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>103.87</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>130.45</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>157.34</span>
-							</div>
-						</div>
-						<div class="graph-item">
-							<div class="graph-item--name bg-white">
-								<span>18:15:00</span>
-							</div>
-							<div class="graph-item--price bg-white">
-								<span>153.45</span>
-							</div>
-							<div class="graph-item--filter bg-white">
-								<span>169.98</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>103.87</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>130.45</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>157.34</span>
-							</div>
-						</div>
-						<div class="graph-item">
-							<div class="graph-item--name bg-white">
-								<span>18:15:00</span>
-							</div>
-							<div class="graph-item--price bg-white">
-								<span>153.45</span>
-							</div>
-							<div class="graph-item--filter bg-white">
-								<span>169.98</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>103.87</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>130.45</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>157.34</span>
-							</div>
-						</div>
-						<div class="graph-item">
-							<div class="graph-item--name bg-white">
-								<span>18:15:00</span>
-							</div>
-							<div class="graph-item--price bg-white">
-								<span>153.45</span>
-							</div>
-							<div class="graph-item--filter bg-white">
-								<span>169.98</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>103.87</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>130.45</span>
-							</div>
-							<div class="graph-item--delete bg-white">
-								<span>157.34</span>
-							</div>
-						</div>
-					</div> -->
-
 					<!-- SVG IMG LOADING -->
 					<div id="loading-section">
 						<svg
@@ -509,8 +481,16 @@
 				</div>
 				<div id="modal__btns" class="modal__btns">
 					<div class="modal__btns-info">
-						<button data-stock-info="symbol-filter" id="btn-add-watchlist">Add</button>
-						<button data-stock-info="symbol-filter" id="btn-remove-watchlist">Remove</button>
+						<button
+							data-stock-info="symbol-filter"
+							id="btn-add-watchlist">
+							Add
+						</button>
+						<button
+							data-stock-info="symbol-filter"
+							id="btn-remove-watchlist">
+							Remove
+						</button>
 					</div>
 				</div>
 			</div>
