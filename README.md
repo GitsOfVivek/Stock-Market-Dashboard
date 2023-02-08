@@ -1,5 +1,5 @@
 # Stock Market Dashboard
-### Demo Link: https://stock-market-dashboard.netlify.app/
+### Demo Link: [StockM.](https://vivek-stock-market-project.netlify.app/)
 
  ## Features
   - Fetch API
