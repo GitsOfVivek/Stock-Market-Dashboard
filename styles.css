@@ -513,7 +513,8 @@ header {
 	);
 }
 .blur {
-	filter: blur(100px);
+	filter: blur(5px);
+	pointer-events: none;
 }
 .hidden {
 	display: none;

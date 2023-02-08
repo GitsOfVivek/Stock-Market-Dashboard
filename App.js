@@ -740,29 +740,65 @@ async function updateWatchList(arr) {
 		for (const x in stockData) {
 			dataArr.push(x);
 		}
-
-		const sliced = Object.fromEntries(
-			Object.entries(stockData[dataArr[1]]).slice(0, 5)
-		);
-		const first = Object.fromEntries(Object.entries(sliced).slice(0, 5));
-
-		const timeArr = [];
-		for (const x in first) {
-			timeArr.push(x);
-		}
-		// price
 		if (
-			stock.price < Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+			stockData['Meta Data']['1. Information']
+				.split(' ')[0]
+				.toLowerCase() !== 'intraday'
 		) {
-			stock.color = 'bg-green';
-		} else if (
-			stock.price === Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
-		) {
-			stock.color = 'bg-white';
+			const sliced = Object.fromEntries(
+				Object.entries(stockData[dataArr[1]]).slice(0, 5)
+			);
+			const first = Object.fromEntries(
+				Object.entries(sliced).slice(0, 5)
+			);
+
+			const timeArr = [];
+			for (const x in first) {
+				timeArr.push(x);
+			}
+			// price
+			if (
+				stock.price <
+				Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+			) {
+				stock.color = 'bg-green';
+			} else if (
+				stock.price ===
+				Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+			) {
+				stock.color = 'bg-white';
+			} else {
+				stock.color = 'bg-red';
+			}
+			stock.price = Number(first[`${timeArr[0]}`]['1. open']).toFixed(2);
 		} else {
-			stock.color = 'bg-red';
+			const sliced = Object.fromEntries(
+				Object.entries(stockData['Time Series (15min)']).slice(0, 5)
+			);
+			const first = Object.fromEntries(
+				Object.entries(sliced).slice(0, 5)
+			);
+
+			const timeArr = [];
+			for (const x in first) {
+				timeArr.push(x);
+			}
+			// price
+			if (
+				stock.price <
+				Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+			) {
+				stock.color = 'bg-green';
+			} else if (
+				stock.price ===
+				Number(first[`${timeArr[0]}`]['1. open']).toFixed(2)
+			) {
+				stock.color = 'bg-white';
+			} else {
+				stock.color = 'bg-red';
+			}
+			stock.price = Number(first[`${timeArr[0]}`]['1. open']).toFixed(2);
 		}
-		stock.price = Number(first[`${timeArr[0]}`]['1. open']).toFixed(2);
 	}
 	showWatchList(arr);
 }
