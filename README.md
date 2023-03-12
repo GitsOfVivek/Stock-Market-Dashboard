@@ -9,7 +9,7 @@
   - Watchlist updates when tab load
   - Price background:
     - Green : Increase
-    - Red : Deacrease
+    - Red : Decrease
     - White : Constant
   - Responsive
   - Creative
